@@ -1,8 +1,3 @@
-Perfect. Since you're starting backend development from scratch, I'll explain this like a senior developer mentoring a junior developer on a real project.
-
-You already shared the project documentation, and that helps a lot because now I can explain things in the context of *your actual architecture*, not just generic theory.
-
-From your project structure:
 
 ```
 services/
@@ -328,6 +323,14 @@ becomes:
 4\. `read()` Method
 ===================
 
+***read() method:***
+- Reads the file from disk (server-side).
+- The file contains JSON data as a string (for example: [{"id":1,"name":"Alice"}]).
+- JSON.parse(data) converts this string into a JavaScript object or array, so your server code can work with it easily.
+- This parsed object/array is used inside the server (not sent directly to the client).
+
+
+
 ```
 async read() {
 
@@ -443,6 +446,9 @@ This is smart because your app won't crash if the file doesn't exist yet.
 
 5\. `write()` Method
 ====================
+***write() method:***
+- Takes a JavaScript object or array and converts it to a JSON string using JSON.stringify.
+- Writes this string to the file, so it can be read later.
 
 ```
 async write(data)

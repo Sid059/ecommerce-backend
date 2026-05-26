@@ -184,13 +184,15 @@ const authenticateToken = (req, res, next) => {
 
 ```
 
-Middleware always receives:
+In Express Middleware always takes/receives three arguments:
 
 | Parameter | Meaning |
 | --- | --- |
-| req | Incoming request |
+| req | Incoming request(the request object)|
 | res | Response object |
-| next | Move to next middleware/controller |
+| next | A function to call the next middleware/controller |
+
+- This is a convention in Express. Express will automatically pass these three arguments to any middleware you use.
 
 * * * * *
 
@@ -371,6 +373,24 @@ means:
 "You are not logged in"
 =======================
 
+***There are two different .json() methods, used in different places:***
+
+- **res.json() in Express (server-side):**
+Used to send a JavaScript object as a JSON response to the client.
+
+Example:
+res.json({ message: "Unauthorized" });
+
+This converts the object to a JSON string and sends it in the HTTP response.
+
+- **.json() on a fetch response (client-side):**
+Used to parse the JSON string received from the server into a JavaScript object.
+
+Example:
+const data = await response.json();
+
+This takes the response body (a JSON string) and parses it into an object.
+
 * * * * *
 
 6\. Verify Token
@@ -435,7 +455,9 @@ req.user = decoded;
 
 ```
 
-This is EXTREMELY important.
+- This is EXTREMELY important. req.user is not built-in.
+- You can add any property to the req object in your middleware.
+- Here, you attach the decoded user info to req.user so later middleware or route handlers can access it.
 
 Now every controller can access:
 
