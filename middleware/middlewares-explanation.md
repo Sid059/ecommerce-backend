@@ -908,6 +908,17 @@ notFound middleware runs
 
 * * * * *
 
+***The notFound middleware and the error middleware are triggered in different situations:***
+
+- notFound middleware is for requests to routes that do not exist.
+
+Example: If a user requests /api/does-not-exist, and no route matches, Express will reach the notFound middleware (usually defined as app.use(notFound) at the end).
+It is called only if no other route or middleware sends a response.
+
+- error middleware is for handling errors passed with next(error) or thrown in your code.
+
+If you call next(error) anywhere, Express skips all other middleware (including notFound) and goes straight to the error middleware.
+
 How These Middleware Work Together
 ==================================
 
@@ -955,6 +966,95 @@ Controller executes
 Errors handled globally
 
 ```
+
+Here’s a more detailed explanation of how middleware is invoked and how you set the sequence:
+
+**1. Middleware Sequence in Express**
+
+- Middleware runs in the order you define it in your code.
+- You can register middleware globally (for all routes) or locally (for specific routes).
+
+**2. Registering Middleware Globally**
+
+```js
+const express = require('express');
+const app = express();
+const authenticateToken = require('./middleware/auth');
+const isAdmin = require('./middleware/admin');
+const errorHandler = require('./middleware/errorHandler');
+const notFound = require('./middleware/notFound');
+
+// Global middleware (runs for every request)
+app.use(express.json()); // built-in middleware for parsing JSON
+app.use(authenticateToken); // runs for every route after this line
+```
+
+**3. Registering Middleware for Specific Routes**
+
+```js
+const router = express.Router();
+
+router.post(
+  '/products',
+  authenticateToken, // checks if user is logged in
+  isAdmin,           // checks if user is admin
+  createProduct      // controller: creates the product
+);
+
+router.get(
+  '/cart',
+  authenticateToken, // only logged-in users can access
+  getCart            // controller: gets the cart
+);
+```
+
+**4. Registering notFound and errorHandler Middleware**
+
+These are usually registered at the end, after all routes:
+
+```js
+app.use(notFound);      // handles 404 errors (route not found)
+app.use(errorHandler);  // handles all errors passed with next(error)
+```
+
+**5. Full Example**
+
+```js
+const express = require('express');
+const app = express();
+const authenticateToken = require('./middleware/auth');
+const isAdmin = require('./middleware/admin');
+const errorHandler = require('./middleware/errorHandler');
+const notFound = require('./middleware/notFound');
+
+// Parse JSON
+app.use(express.json());
+
+// Example route with middleware chain
+app.post(
+  '/products',
+  authenticateToken,
+  isAdmin,
+  (req, res) => {
+    // controller logic here
+    res.json({ message: 'Product created' });
+  }
+);
+
+// 404 handler (should be after all routes)
+app.use(notFound);
+
+// Error handler (should be last)
+app.use(errorHandler);
+
+app.listen(3000, () => console.log('Server running'));
+```
+
+**Summary:**  
+- Middleware is invoked in the order you define it.
+- You can attach middleware globally or to specific routes.
+- notFound and errorHandler are usually last, to catch unmatched routes and errors.  
+- The sequence you set in your code determines the flow for every request.
 
 * * * * *
 
