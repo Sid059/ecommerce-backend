@@ -4,6 +4,7 @@ const FileService = require('../services/fileService');
 const { generateToken } = require('../services/tokenService');
 const { STATUS, MESSAGES, ROLES } = require('../constants');
 
+// Why is userService created outside the register function? because we need to use userService in both register and login functions, so it makes sense to create it outside the register function so that it can be reused in both functions without having to create it multiple times.
 const userService = new FileService('users');
 
 const generateId = () => `user_${uuidv4()}`;
@@ -85,6 +86,7 @@ const register = async (req, res) => {
 
     // Create empty cart for user
     const cartService = new FileService('carts');
+    // the reason why cartService creation is inside the register function is because we only need to create a cart for the user when they register. If we put it outside the register function, it would be created every time the server starts, which is unnecessary and could lead to performance issues. By creating it inside the register function, we ensure that a cart is only created when a new user registers, which is more efficient and makes more sense from a logical standpoint.
     const carts = await cartService.read();
     carts.push({ userId: newUser.id, items: [] });
     

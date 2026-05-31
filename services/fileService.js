@@ -4,10 +4,12 @@ const path = require('path');
 class FileService {
   constructor(filename) {
     this.filePath = path.join(__dirname, '../data', `${filename}.json`);
+    //path.join() method is used to join multiple path segments into a single path. Its syntax is path.join(segment1, segment2, ...). In this case, we are joining the directory name of the current file (__dirname), the relative path to the data directory ('../data'), and the filename with a .json extension (`${filename}.json`). This creates a complete file path to the JSON file that will be used for storing data. For example, if filename is 'users', the resulting filePath would be something like '/path/to/project/data/users.json'. This allows us to read from and write to this file when performing CRUD operations on our data.
   }
 
   async read() {
     try {
+      // syntax for reading a file is fs.readFile(filePath, encoding)
       const data = await fs.readFile(this.filePath, 'utf-8');
       return JSON.parse(data);
     } catch (error) {
@@ -22,6 +24,7 @@ class FileService {
 
   async write(data) {
     try {
+      // syntax for writing to a file is fs.write(filePath, data(should be stringified), encoding is optional))
       await fs.writeFile(this.filePath, JSON.stringify(data, null, 2));
     } catch (error) {
       throw new Error(`Failed to write to ${this.filePath}: ${error.message}`);
