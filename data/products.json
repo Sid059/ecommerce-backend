@@ -1,0 +1,68 @@
+[
+  {
+    "id": "prod_1",
+    "name": "Wireless Headphones",
+    "price": 99.99,
+    "description": "High-quality wireless headphones with noise cancellation. Perfect for music lovers and remote workers.",
+    "category": "Electronics",
+    "imageUrl": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400",
+    "stock": 50,
+    "rating": 4.5,
+    "createdAt": "2024-01-15T10:30:00Z"
+  },
+  {
+    "id": "prod_2",
+    "name": "Smart Watch",
+    "price": 199.99,
+    "description": "Track your fitness, receive notifications, and monitor your health with this advanced smart watch.",
+    "category": "Electronics",
+    "imageUrl": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400",
+    "stock": 30,
+    "rating": 4.8,
+    "createdAt": "2024-01-15T10:30:00Z"
+  },
+  {
+    "id": "prod_3",
+    "name": "Cotton T-Shirt",
+    "price": 24.99,
+    "description": "Comfortable 100% cotton t-shirt available in multiple colors. Perfect for everyday wear.",
+    "category": "Clothing",
+    "imageUrl": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400",
+    "stock": 100,
+    "rating": 4.2,
+    "createdAt": "2024-01-15T10:30:00Z"
+  },
+  {
+    "id": "prod_4",
+    "name": "Running Shoes",
+    "price": 79.99,
+    "description": "Lightweight running shoes with superior cushioning. Ideal for runners of all levels.",
+    "category": "Footwear",
+    "imageUrl": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400",
+    "stock": 45,
+    "rating": 4.6,
+    "createdAt": "2024-01-15T10:30:00Z"
+  },
+  {
+    "id": "prod_5",
+    "name": "Coffee Mug",
+    "price": 12.99,
+    "description": "Ceramic coffee mug with minimalist design. Microwave and dishwasher safe.",
+    "category": "Home",
+    "imageUrl": "https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=400",
+    "stock": 200,
+    "rating": 4.3,
+    "createdAt": "2024-01-15T10:30:00Z"
+  },
+  {
+    "id": "prod_6",
+    "name": "Laptop Backpack",
+    "price": 49.99,
+    "description": "Durable backpack with padded laptop compartment. Perfect for travel or daily commute.",
+    "category": "Accessories",
+    "imageUrl": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400",
+    "stock": 35,
+    "rating": 4.7,
+    "createdAt": "2024-01-15T10:30:00Z"
+  }
+]

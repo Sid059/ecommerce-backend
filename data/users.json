@@ -1,0 +1,10 @@
+[
+  {
+    "id": "user_admin",
+    "email": "admin@shop.com",
+    "name": "Admin User",
+    "password": "$2a$10$rqCqZx5qJ5xqJ5xqJ5xqJ5xqJ5xqJ5xqJ5xqJ5xqJ5xqJ5xqJ5xq",
+    "role": "admin",
+    "createdAt": "2024-01-15T10:30:00Z"
+  }
+]

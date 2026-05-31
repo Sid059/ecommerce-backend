@@ -1,4 +1,4 @@
-const bycrypt = require('bycrypt');
+const bcrypt = require('bcryptjs');
 const { v4: uuidv4 } = require('uuid');
 const FileService = require('../services/fileService');
 const { generateToken } = require('../services/tokenService');
@@ -69,7 +69,7 @@ const register = async (req, res) => {
     }
 
     // Hash password and create user
-    // bycrypt.hash() takes in password and salt rounds as arguments and returns a promise that resolves to the hashed password. 
+    // bcrypt.hash() takes in password and salt rounds as arguments and returns a promise that resolves to the hashed password. 
     // The salt round 10 means that the hashing algo will be applied 10 times making it more secure.
     const hashedPassword = await bcrypt.hash(password, 10);
     
@@ -139,7 +139,7 @@ const login = async (req, res) => {
 
     // Verify password
     // Real password is never stored in the database. Instead we store only a hashed version of the password for security reasons.
-    //bycrypt.compare() takes in the plain text password and the hashed password and returns a promise that resolves to true if they match and false if they don't. This is how we verify that the password entered by the user matches the hashed password stored in our "database" (the JSON file).
+    //bcrypt.compare() takes in the plain text password and the hashed password and returns a promise that resolves to true if they match and false if they don't. This is how we verify that the password entered by the user matches the hashed password stored in our "database" (the JSON file).
     const isValid = await bcrypt.compare(password, user.password);
     if (!isValid) {
       return res.status(STATUS.UNAUTHORIZED).json({ 
