@@ -80,7 +80,9 @@ const addToCart = async (req, res) => {
 // Update cart item
 const updateCartItem = async (req, res) => {
   try {
+    //req.params is used to access route parameters, in this case productId is expected to be a route parameter like /cart/item/:productId
     const { productId } = req.params;
+    //req.body is used to access the data sent in the request body when updating the quantity of a cart item.
     const { quantity } = req.body;
     
     if (quantity < 0) {
