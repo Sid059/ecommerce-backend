@@ -1,9 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-const dotenv = require('dotenv');
-
-//must run before files need environment variables, so they can access them when imported
-dotenv.config();
 
 // Import routes
 const authRoutes = require('./routes/authRoutes');
@@ -13,6 +9,7 @@ const cartRoutes = require('./routes/cartRoutes');
 // Import middleware
 const { errorHandler, notFound } = require('./middleware/errorHandler');
 
+//This creates an instance of an Express application or server. The app variable is used to define routes, middleware, and other configurations for your backend API. It serves as the main entry point for handling incoming HTTP requests and sending responses back to clients. By using app, you can set up various endpoints for authentication, product management, cart operations, and more, allowing you to build a fully functional e-commerce backend.
 const app = express();
 
 // Middleware
@@ -28,17 +25,20 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Request logger
+//what this does is it logs every incoming request to the console with a timestamp, HTTP method, and URL. This is useful for debugging and monitoring purposes, as it allows you to see the traffic coming into your application in real-time.
 app.use((req, res, next) => {
   console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
   next();
 });
 
 // Routes
+// app.use() is used to mount both route handlers and middleware functions at the specified path. When you use app.use('/api/auth', authRoutes), you are mounting the authRoutes router at the /api/auth path. This means that any request that starts with /api/auth will be handled by the authRoutes router. Similarly, app.use('/api/products', productRoutes) mounts the productRoutes router at the /api/products path, and app.use('/api/cart', cartRoutes) mounts the cartRoutes router at the /api/cart path. This allows you to organize your routes into separate files and keep your main application file clean and modular.
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/cart', cartRoutes);
 
 // Health check
+// This endpoint is used to check if the server is running and healthy. How do we know its healthy ? We can check the status, timestamp, and uptime. The status should be 'OK', the timestamp will show the current time, and the uptime will show how long the server has been running. This is useful for monitoring and ensuring that your application is up and running as expected. You can use this endpoint in your monitoring tools or simply access it in your browser to verify that the server is healthy.
 app.get('/health', (req, res) => {
   res.json({ 
     status: 'OK', 
