@@ -1,0 +1,28 @@
+[
+  {
+    "id": "order_bbe6bf41-8598-4121-8f1a-ee6dd4313736",
+    "userId": "user_e64398cb-aedb-498c-a6d1-46501ce0bfe6",
+    "items": [
+      {
+        "productId": "prod_1",
+        "productName": "Wireless Headphones",
+        "quantity": 2,
+        "price": 99.99,
+        "subtotal": 199.98
+      }
+    ],
+    "subtotal": 199.98,
+    "shipping": 5.99,
+    "tax": 19.998,
+    "total": 225.968,
+    "shippingAddress": {
+      "street": "123 Main St",
+      "city": "New York",
+      "zip": "10001",
+      "country": "USA"
+    },
+    "paymentMethod": "card",
+    "status": "pending",
+    "createdAt": "2026-06-12T16:15:35.721Z"
+  }
+]

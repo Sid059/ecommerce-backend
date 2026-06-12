@@ -6,6 +6,7 @@ const authRoutes = require('./routes/authRoutes');
 const productRoutes = require('./routes/productRoutes');
 const cartRoutes = require('./routes/cartRoutes');
 const wishlistRoutes = require('./routes/wishlistRoutes');
+const orderRoutes = require('./routes/orderRoutes');
 
 // Import middleware
 const { errorHandler, notFound } = require('./middleware/errorHandler');
@@ -38,6 +39,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/cart', cartRoutes);
 app.use('/api/wishlist', wishlistRoutes);
+app.use('/api/orders', orderRoutes);
 
 // Health check
 // This endpoint is used to check if the server is running and healthy. How do we know its healthy ? We can check the status, timestamp, and uptime. The status should be 'OK', the timestamp will show the current time, and the uptime will show how long the server has been running. This is useful for monitoring and ensuring that your application is up and running as expected. You can use this endpoint in your monitoring tools or simply access it in your browser to verify that the server is healthy.

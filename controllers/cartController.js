@@ -5,36 +5,35 @@ const cartService = new FileService('carts');
 // we are making product service instance because we need to access product data to add to cart
 const productService = new FileService('products');
 
+// Get user's cart
 const getCart = async (req, res) => {
-    try{
-        const carts = await cartService.read();
-        let cart = carts.find(c => c.userId === req.user.id);
-
-        if (!cart) {
-            cart = {
-                userId: req.user.id,
-                items: [] // Initialize with empty items array if cart doesn't exist to avoid undefined errors later
-            };
-        }
-
-        const products = await productService.read();
-        const itemsWithDetails = cart.items.map(item => {
-            const product = products.find(p => p.id === item.productId);
-            return {
-                ...item,
-                product: product || null, // null because product might have been deleted after being added to the cart
-                subtotal: product ? product.price * item.quantity : 0
-            };
-        });
-        
+  try {
+    const carts = await cartService.read();
+    let cart = carts.find(c => c.userId === req.user.id);
+    
+    // If no cart exists, return empty cart (not error)
+    if (!cart) {
+      return res.json({ items: [], total: 0 });
+    }
+    
+    const products = await productService.read();
+    const itemsWithDetails = cart.items.map(item => {
+      const product = products.find(p => p.id === item.productId);
+      return {
+        ...item,
+        product: product || null,
+        subtotal: product ? product.price * item.quantity : 0
+      };
+    });
+    
     const total = itemsWithDetails.reduce((sum, item) => sum + item.subtotal, 0);
     
     res.json({ items: itemsWithDetails, total });
-
-    } catch (error) {
-        res.status(STATUS.INTERNAL_ERROR).json({ message: error.message });
-    }
-}
+  } catch (error) {
+    console.error('GetCart error:', error);
+    res.status(STATUS.INTERNAL_ERROR).json({ message: error.message });
+  }
+};
 
 // Add to cart
 const addToCart = async (req, res) => {
