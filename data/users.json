@@ -6,5 +6,13 @@
     "password": "$2a$10$rqCqZx5qJ5xqJ5xqJ5xqJ5xqJ5xqJ5xqJ5xqJ5xqJ5xqJ5xqJ5xq",
     "role": "admin",
     "createdAt": "2024-01-15T10:30:00Z"
+  },
+  {
+    "id": "user_e64398cb-aedb-498c-a6d1-46501ce0bfe6",
+    "email": "test@test.com",
+    "name": "Test User",
+    "password": "$2b$10$.Frozr1leqzN2jc3Dik/Ie2vfGpdEtjUeGqZuxy5enLfd4UF4hCFq",
+    "role": "user",
+    "createdAt": "2026-06-11T16:41:36.587Z"
   }
 ]
